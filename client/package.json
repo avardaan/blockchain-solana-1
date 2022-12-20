@@ -13,8 +13,8 @@
     ]
   },
   "dependencies": {
-    "@project-serum/anchor": "^0.18.2",
-    "@solana/web3.js": "^1.70.1",
+    "@project-serum/anchor": "^0.25.0",
+    "@solana/web3.js": "^1.70.2",
     "@types/react": "^17.0.13",
     "@types/react-dom": "^17.0.8",
     "@vitejs/plugin-react": "^2.0.0",
