@@ -224,7 +224,7 @@ const App = () => {
 			{/* This was solely added for some styling fanciness */}
 			<div className={walletAddress ? 'authed-container' : 'container'}>
 				<div className='header-container'>
-					<p className='header'>🏎️ Formula 1 GIF Portal</p>
+					<p className='header'>🏎️ Formula 1 GIF Portal by Vardaan</p>
 					<p className='sub-text'>View your F1 GIF collection on the solana blockchain!</p>
 					{/* Add the condition to show this only if we don't have a wallet address */}
 					{!walletAddress && renderNotConnectedContainer()}
