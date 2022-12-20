@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Connection, PublicKey, clusterApiUrl } from '@solana/web3.js';
 import { Program, AnchorProvider, web3 } from '@project-serum/anchor';
+import { Buffer } from 'buffer';
+window.Buffer = Buffer;
 
 // Constants
 const TWITTER_HANDLE = '_buildspace';
@@ -63,12 +65,27 @@ const App = () => {
 	};
 
 	const sendGif = async () => {
-		if (inputValue.length > 0) {
-			console.log('Gif link:', inputValue);
-			setGifList([...gifList, inputValue]);
-			setInputValue('');
-		} else {
-			console.log('Empty input. Try again.');
+		if (inputValue.length === 0) {
+			console.log('No gif link given!');
+			return;
+		}
+		setInputValue('');
+		console.log('Gif link:', inputValue);
+		try {
+			const provider = getProvider();
+			const program = await getProgram();
+
+			await program.rpc.addGif(inputValue, {
+				accounts: {
+					baseAccount: baseAccount.publicKey,
+					user: provider.wallet.publicKey,
+				},
+			});
+			console.log('GIF successfully sent to program', inputValue);
+
+			await getGifList();
+		} catch (error) {
+			console.log('Error sending GIF:', error);
 		}
 	};
 
@@ -206,8 +223,8 @@ const App = () => {
 			{/* This was solely added for some styling fanciness */}
 			<div className={walletAddress ? 'authed-container' : 'container'}>
 				<div className='header-container'>
-					<p className='header'>🖼 GIF Portal</p>
-					<p className='sub-text'>View your GIF collection in the metaverse ✨</p>
+					<p className='header'>🏎️ Formula 1 GIF Portal</p>
+					<p className='sub-text'>View your F1 GIF collection on the solana blockchain!</p>
 					{/* Add the condition to show this only if we don't have a wallet address */}
 					{!walletAddress && renderNotConnectedContainer()}
 					{walletAddress && renderConnectedContainer()}
