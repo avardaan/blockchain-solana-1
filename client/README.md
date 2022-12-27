@@ -6,4 +6,4 @@ Install Node and npm
 - node createKeyPair.js
 - cd ../
 - npm run dev
-- Edit [App.jsx](#src/App.jsx) and watch it live update!
+- Edit [App.jsx](#src/App.jsx) and watch it update live
